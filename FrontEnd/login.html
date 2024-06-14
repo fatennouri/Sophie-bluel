@@ -1,21 +1,17 @@
 <!DOCTYPE html>  
-<html lang="fr"> <!-- Déclaration du type de document et définition de la langue de la page -->
+<html lang="fr">
 <head>
-	<meta charset="UTF-8"> <!-- Définition du jeu de caractères de la page en UTF-8 -->
-	<title>Sophie Bluel - Architecte d'intérieur</title> <!-- Titre de la page qui apparaîtra dans l'onglet du navigateur -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Configuration de la mise en page responsive -->
-	
-	<!-- Préconnexion aux services de Google Fonts pour optimiser le chargement des polices -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<meta charset="UTF-8"> 
+	<title>Sophie Bluel - Architecte d'intérieur</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	
-	<!-- Lien vers les polices Google utilisées dans le projet -->
-	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	
-	<!-- Description de la page (actuellement vide, à remplir pour améliorer le SEO) -->
-	<meta name="description" content="">
+		<meta name="description" content="">
 	
-	<!-- Lien vers la feuille de style CSS principale du projet -->
+	
 	<link rel="stylesheet" href="./assets/style.css">
 	
 	<!-- Inclusion du script JavaScript pour la gestion du login avec l'attribut defer pour le charger après le contenu HTML -->
@@ -24,40 +20,37 @@
 <body>
 	<!-- En-tête de la page contenant le titre et le menu de navigation -->
 	<header>
-		<h1><a href="index.html">Sophie Bluel</a> <span>Architecte d'intérieur</span></h1> <!-- Titre principal avec un lien vers la page d'accueil -->
-		<nav>
+		<h1><a href="index.html">Sophie Bluel</a> <span>Architecte d'intérieur</span></h1> 
 			<ul>
-				<li><a href="index.html">projets</a></li> <!-- Lien vers la section projets -->
-				<li>contact</li> <!-- Lien vers la section contact (non cliquable ici, devrait être ajusté pour être un lien) -->
-				<li id="loginLink">login</li> <!-- Lien pour se connecter -->
-				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li> <!-- Icône Instagram -->
+				<li><a href="index.html">projets</a></li> 
+				<li>contact</li> 
+				<li id="loginLink">login</li> 
+				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li> 
 			</ul>
 		</nav>
 	</header>
 
-	<!-- Contenu principal de la page -->
 	<main>
 		<!-- Section de connexion -->
 		<section id="login">
-			<h2>Log In</h2> <!-- Titre de la section de connexion -->
-			<label for="email">E-mail</label> <!-- Étiquette pour le champ de l'email -->
-			<input type="email" name="email" id="email"> <!-- Champ de saisie pour l'email -->
+			<h2>Log In</h2> 
+			<label for="email">E-mail</label> 
+			<input type="email" name="email" id="email"> 
 			
-			<label for="password">Mot de passe</label> <!-- Étiquette pour le champ du mot de passe -->
-			<input type="password" name="password" id="password"> <!-- Champ de saisie pour le mot de passe -->
+			<label for="password">Mot de passe</label> 
+			<input type="password" name="password" id="password"> 
 			
-			<span id="login_error"></span> <!-- Zone pour afficher les messages d'erreur de connexion -->
+			<span id="login_error"></span> 
 			
-			<input type="submit" id="se_connecter" value="Se connecter"> <!-- Bouton pour soumettre le formulaire de connexion -->
-			<a href="">Mot de passe oublié</a> <!-- Lien pour récupérer un mot de passe oublié -->
+			<input type="submit" id="se_connecter" value="Se connecter">
+			<a href="">Mot de passe oublié</a>
 		</section>
 	</main>
 
-	<!-- Pied de page avec un lien vers les mentions légales -->
-	<footer>
+		<footer>
 		<nav>
 			<ul>
-				<li>Mentions Légales</li> <!-- Lien vers les mentions légales -->
+				<li>Mentions Légales</li> 
 			</ul>
 		</nav>
 	</footer>
