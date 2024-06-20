@@ -1,10 +1,9 @@
-// CONSTANTES
 const GALLERY_MODALE = document.querySelector(".modal-gallery"); 
 const BUTTON_CLOSE = document.querySelector('.js-modal-close-1'); 
 const MODALE_WRAPPER = document.querySelector(".modal-wrapper"); 
 const BUTTON_MODIF_WORKS = document.querySelector('#modif_projet'); 
 
-let modal = null; // Variable pour stocker la référence de la modal
+let modal = null; 
 
 // FONCTION OUVERTURE BOITE MODALE
 const OPEN_MODAL = function (e) {
@@ -29,7 +28,6 @@ const CLOSE_MODAL = function (e) {
 
 // AJOUT LISTENER SUR CLIQUE BOUTON MODIFIER POUR APPELER OUVERTURE MODALE  
 BUTTON_MODIF_WORKS.addEventListener('click', OPEN_MODAL); 
-
 // FONCTION SUPPRESSION TRAVAUX
 const DELETE_WORK = function (e) {
     const confirmation = confirm("Êtes-vous sûr de vouloir supprimer ce projet ?"); 
@@ -42,16 +40,15 @@ const DELETE_WORK = function (e) {
         }
     }
 }
-
 // APPEL API SUPPRESSION TRAVAUX
 function deleteWorkFetch(idWork) {
-    let token = sessionStorage.getItem("token"); // Récupère le token de session
+    let token = sessionStorage.getItem("token"); 
 
     fetch(WORKS_API + '/' + idWork, {
-        method: "DELETE", // Méthode DELETE pour supprimer le travail
+        method: "DELETE", 
         headers: {
             'Accept': '*/*',
-            'Authorization': `Bearer ${token}`, // Utilise le token pour l'autorisation
+            'Authorization': `Bearer ${token}`, 
         }
     })
     .then(response => {

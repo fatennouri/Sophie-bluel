@@ -1,4 +1,3 @@
-// CONSTANTES
 const NEW_MODALE = document.querySelector(".modal-new-photo"); 
 const BUTTON_CLOSE_NEW = document.querySelector('.js-modal-close-new'); 
 const BUTTON_BACK = document.querySelector('.modal-back'); 
@@ -27,7 +26,6 @@ const OPEN_MODAL_NEW = function (e) {
     resetForm(); 
     loadCategories(); 
 }
-
 // FONCTION FERMETURE BOITE MODALE
 const CLOSE_MODAL_NEW = function (e) {
     if (modal_new == null) return; 
@@ -42,12 +40,10 @@ BUTTON_BACK.addEventListener("click", function() {
     modal_new.style.display = "none"; 
     modal.style.display = "flex"; 
 })
-
 // BOUTON AJOUT PHOTO
 BUTTON_ADD.addEventListener("click", function() {
     INPUT_PICTURE.click(); 
 })
-
 // SELECTEUR FICHIER PHOTO
 INPUT_PICTURE.addEventListener("change", function() {
    
@@ -62,7 +58,6 @@ INPUT_PICTURE.addEventListener("change", function() {
         PICTURE_SELECTION.style.display = "none"; 
     }
 })
-
 // REMISE A ZERO SELECTION IMAGE
 function resetPhotoSelection() {
     INPUT_PICTURE.value = ""; 
@@ -70,13 +65,11 @@ function resetPhotoSelection() {
     PICTURE_PREVIEW.style.display = "none"; 
     PICTURE_SELECTION.style.display = "block";
 }
-
 // REMISE A ZERO FORMULAIRE UPLOAD
 function resetForm() {
     CATEGORIES_SELECT.value = 0; 
     TITLE_NEW_PHOTO.value = ""; 
 }
-
 // CHARGEMENT CATEGORIES DEPUIS API
 function loadCategories() {
     CATEGORIES_SELECT.innerHTML = ''; 
@@ -95,39 +88,36 @@ function loadCategories() {
         }   
     })
 }
-
 // UPLOAD NOUVEAU PROJET
 const UPLOAD_WORK = function() {
     let token = sessionStorage.getItem("token");
 
     const formData = new FormData();
     formData.append("image", INPUT_PICTURE.files[0]); 
-    formData.append("title", TITLE_NEW_PHOTO.value); // Ajoute le titre au formulaire
-    formData.append("category", CATEGORIES_SELECT.value); // Ajoute la catégorie au formulaire
-    
+    formData.append("title", TITLE_NEW_PHOTO.value); 
+    formData.append("category", CATEGORIES_SELECT.value);
     fetch(WORKS_API, {
         method: "POST",
         headers: {
             'Accept': '*/*',
             'Authorization': `Bearer ${token}`,
         },
-        body: formData // Envoie le formulaire
+        body: formData 
     })
     .then(response => {
         if (response.status === 200 || response.status === 201) {
-            resetPhotoSelection(); // Réinitialise l'aperçu de la photo
-            resetForm(); // Réinitialise le formulaire
+            resetPhotoSelection();
+            resetForm(); 
             refreshWorks(GALLERY_MODALE, true); 
             refreshWorks(GALLERY_DIV, false); 
-            VERIFICATION(); // Vérifie si le formulaire est complet
+            VERIFICATION();
         } else if (response.status === 401) {
             alert('Session expirée ou invalide'); 
         } else {
-            alert('Erreur technique inconnue'); // Alerte en cas d'erreur technique
+            alert('Erreur technique inconnue');
         }
     })
 }
-
 // VERIFICATION FORMULAIRE COMPLET
 const VERIFICATION = function (e) {
     // Vérifie si tous les champs du formulaire sont remplis
@@ -141,7 +131,6 @@ const VERIFICATION = function (e) {
         BUTTON_SUBMIT.removeEventListener("click", UPLOAD_WORK); 
     }
 }
-
 // Ajoute des écouteurs d'événements pour vérifier le formulaire lors des changements
 INPUT_PICTURE.addEventListener("change", VERIFICATION);
 CATEGORIES_SELECT.addEventListener("change", VERIFICATION);

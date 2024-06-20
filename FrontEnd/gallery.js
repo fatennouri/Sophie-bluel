@@ -1,19 +1,16 @@
-// CONSTANTES
 const BASE_URL = "http://localhost:5678/api/"; 
-const WORKS_API = BASE_URL + "works"; // Endpoint pour récupérer les travaux
-const CATEGORY_API = BASE_URL + "categories"; // Endpoint pour récupérer les catégories
+const WORKS_API = BASE_URL + "works"; 
+const CATEGORY_API = BASE_URL + "categories"; 
 const GALLERY_DIV = document.querySelector(".gallery"); 
 const FILTER_DIV = document.querySelector(".filter"); 
 
 // Affiche les travaux dans la galerie
-fetchWorks(GALLERY_DIV, false); // Récupère et affiche les travaux sans bouton de suppression
-
+fetchWorks(GALLERY_DIV, false); 
 // Rafraîchit les travaux
 function refreshWorks(targetDiv, deleteButton) {
     targetDiv.innerHTML = ''; 
     fetchWorks(targetDiv, deleteButton); 
 }
-
 // Récupération des travaux
 function fetchWorks(targetDiv, deleteButton) {
     // Effectue une requête pour obtenir les travaux
@@ -26,7 +23,6 @@ function fetchWorks(targetDiv, deleteButton) {
             }
         });
 }
-
 // Affichage d'un travail
 function createWork(work, targetDiv, deleteButton) {
     let figure = document.createElement("figure"); 
@@ -41,7 +37,6 @@ function createWork(work, targetDiv, deleteButton) {
         createDeleteButton(figure, work); 
     }
 }
-
 // Récupération des catégories
 fetch(CATEGORY_API)
     .then(response => response.json()) 
@@ -54,7 +49,6 @@ fetch(CATEGORY_API)
             createFilterButton(category); 
         }   
     });
-
 // Création des boutons de filtre   
 function createFilterButton(category) {
     let categoryLink = document.createElement("a"); 
@@ -65,7 +59,7 @@ function createFilterButton(category) {
 
     // Ajoute un écouteur d'événement au bouton de filtre
     categoryLink.addEventListener("click", function() {
-        filterWorksByCategory(category.id); // Filtre les travaux par catégorie lors du clic
+        filterWorksByCategory(category.id);
     });
 }
 
@@ -80,14 +74,11 @@ function filterWorksByCategory(categoryId) {
             createWork(workList[i], GALLERY_DIV, false); 
         }  
     }
-
-    // Gère l'apparence des filtres (sélection)
     removeSelectedClass(); 
     addSelectedClass(categoryId); 
 }
 
-// Modification de l'état du bouton login/logout si nécessaire
-gestion_login(); // Vérifie l'état de connexion et met à jour l'interface
+gestion_login(); 
 
 // Création d'un bouton de suppression pour chaque image
 function createDeleteButton(figure, work) {
@@ -100,7 +91,7 @@ function createDeleteButton(figure, work) {
 
 // Ajoute la classe "selected" à une catégorie
 function addSelectedClass(categoryId) {
-    document.getElementById("category" + categoryId).classList.add("selected"); // Ajoute la classe "selected" à la catégorie
+    document.getElementById("category" + categoryId).classList.add("selected");
 }
 
 // Supprime la classe "selected" des catégories
@@ -114,7 +105,6 @@ function removeSelectedClass() {
 // Gestion de l'état de connexion
 function gestion_login() {
     if (sessionStorage.getItem("token")) {
-        // Change le texte du lien login en logout
         let loginLogoutLink = document.getElementById("login_logout");
         loginLogoutLink.textContent = "logout";
         
@@ -126,18 +116,13 @@ function gestion_login() {
         let projet_modif = document.getElementById("modif_projet");
         projet_modif.style.display = "inline";
         
-        // Cache les filtres en mode édition
         let button_filter = document.querySelector(".filter");
         button_filter.style.display = "none";
         
-        // Déconnexion lors du clic sur logout
         loginLogoutLink.addEventListener("click", function(event) {
             event.preventDefault();
 
-            // Supprime le token du session storage
             sessionStorage.removeItem("token");
-
-            // Redirige vers la page d'accueil
             window.location.href = "index.html";
         });
     }

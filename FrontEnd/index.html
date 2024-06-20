@@ -4,27 +4,14 @@
     <meta charset="UTF-8" />
     <title>Sophie Bluel - Architecte d'intérieur</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Préconnexion aux services de Google Fonts pour optimiser le chargement des polices -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Lien vers les polices Google utilisées dans le projet -->
     <link
       href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
       rel="stylesheet"
     />
-
-    <meta
-      name="description"
-      content="Site de l'architecte d'intérieur Sophie Bluel"
-    />
-
-    <script
-      src="https://kit.fontawesome.com/1e4c81f9ae.js"
-      crossorigin="anonymous"
-    ></script>
-
+    <meta name="description"content="Site de l'architecte d'intérieur Sophie Bluel"/>
+    <script src="https://kit.fontawesome.com/1e4c81f9ae.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./assets/style.css" />
 
     <!-- Inclusion des scripts JavaScript pour la galerie et les modales avec l'attribut defer pour les charger après le contenu HTML -->
@@ -39,7 +26,7 @@
         <i class="fa-regular fa-pen-to-square"></i>Mode édition
       </div>
     </section>
-<!--fin section en mode architecte connectéé-->
+    <!--fin section en mode architecte connectéé-->
     <header>
       <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
       <nav>
@@ -49,13 +36,12 @@
           <li><a href="login.html" id="login_logout">Login</a></li>
           <li>
             <a href="https://www.instagram.com/sophiebluel" target="_blank">
-              <img src="./assets/icons/instagram.png" alt="Instagram"/>
-          </a>
+              <img src="./assets/icons/instagram.png" alt="Instagram" />
+            </a>
           </li>
         </ul>
       </nav>
     </header>
-
     <main>
       <!-- Section d'introduction avec une image et une description de l'architecte -->
       <section id="introduction">
@@ -81,7 +67,6 @@
           </p>
         </article>
       </section>
-
       <!-- Section portfolio avec une galerie de projets et des modales pour l'édition et l'ajout de photos -->
       <section id="portfolio">
         <h2>
@@ -111,7 +96,10 @@
         <aside id="modal2" class="modal" style="display: none">
           <div class="modal-wrapper-new">
             <div class="top">
-              <button class="modal-back" aria-label="Revenir à la modale précédente">
+              <button
+                class="modal-back"
+                aria-label="Revenir à la modale précédente"
+              >
                 <i class="fa-solid fa-arrow-left"></i>
               </button>
               <button class="js-modal-close-new" aria-label="Fermer la modale">
@@ -144,10 +132,7 @@
                 <label for="titre">Titre</label>
                 <input name="titre" class="input-titre" type="text" />
                 <label for="categorie">Catégorie</label>
-                <select
-                  name="categorie"
-                  class="select-category"
-                ></select>
+                <select name="categorie" class="select-category"></select>
                 <div id="separation2"></div>
                 <button class="button-submit">Valider</button>
               </div>
@@ -161,7 +146,7 @@
         <!-- Galerie de projets -->
         <div class="gallery"></div>
       </section>
-      
+
       <!-- Section contact avec un formulaire -->
       <section id="contact">
         <h2>Contact</h2>
@@ -172,13 +157,17 @@
           <label for="email">Email</label>
           <input type="email" name="email" id="email" required />
           <label for="message">Message</label>
-          <textarea name="message" id="message" cols="30" rows="10" required></textarea>
+          <textarea
+            name="message"
+            id="message"
+            cols="30"
+            rows="10"
+            required
+          ></textarea>
           <input type="submit" value="Envoyer" />
         </form>
       </section>
     </main>
-
-    <!-- Pied de page avec un lien vers les mentions légales -->
     <footer>
       <nav>
         <ul>
