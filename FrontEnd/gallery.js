@@ -62,7 +62,6 @@ function createFilterButton(category) {
         filterWorksByCategory(category.id);
     });
 }
-
 // Filtre les travaux par catégorie
 function filterWorksByCategory(categoryId) {
     // Vide le contenu de la galerie
@@ -101,18 +100,15 @@ function removeSelectedClass() {
         filters[i].classList.remove("selected"); 
     }
 }
-
 // Gestion de l'état de connexion
 function gestion_login() {
     if (sessionStorage.getItem("token")) {
         let loginLogoutLink = document.getElementById("login_logout");
         loginLogoutLink.textContent = "logout";
         
-        // Affiche le bandeau d'édition
         let bandeau_edit = document.getElementById("edition");
         bandeau_edit.style.display = "flex";
         
-        // Affiche l'option de modification des projets
         let projet_modif = document.getElementById("modif_projet");
         projet_modif.style.display = "inline";
         
@@ -121,7 +117,6 @@ function gestion_login() {
         
         loginLogoutLink.addEventListener("click", function(event) {
             event.preventDefault();
-
             sessionStorage.removeItem("token");
             window.location.href = "index.html";
         });

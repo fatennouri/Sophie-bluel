@@ -16,7 +16,6 @@ const OPEN_MODAL = function (e) {
     GALLERY_MODALE.innerHTML = ''; 
     fetchWorks(GALLERY_MODALE, true); 
 }
-
 // FONCTION FERMETURE BOITE MODALE
 const CLOSE_MODAL = function (e) {
     if (modal == null) return; 
@@ -42,7 +41,7 @@ const DELETE_WORK = function (e) {
 }
 // APPEL API SUPPRESSION TRAVAUX
 function deleteWorkFetch(idWork) {
-    let token = sessionStorage.getItem("token"); 
+    let token = localStorage.getItem("token");
 
     fetch(WORKS_API + '/' + idWork, {
         method: "DELETE", 
