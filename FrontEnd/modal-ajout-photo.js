@@ -15,7 +15,6 @@ let modal_new = null;
 const OPEN_MODAL_NEW = function (e) {
     e.preventDefault(); 
     modal.style.display = "none";
-    // Affiche la modal de création
     modal_new = document.querySelector("#modal2");
     modal_new.style.display = null;
     modal_new.addEventListener('click', CLOSE_MODAL_NEW); 
@@ -35,16 +34,16 @@ const CLOSE_MODAL_NEW = function (e) {
     modal_new.removeEventListener('click', CLOSE_MODAL_NEW);
     BUTTON_CLOSE_NEW.removeEventListener('click', CLOSE_MODAL_NEW); }
 
-// BOUTON RETOUR
+
 BUTTON_BACK.addEventListener("click", function() {
     modal_new.style.display = "none"; 
     modal.style.display = "flex"; 
 })
-// BOUTON AJOUT PHOTO
+
 BUTTON_ADD.addEventListener("click", function() {
     INPUT_PICTURE.click(); 
 })
-// SELECTEUR FICHIER PHOTO
+
 INPUT_PICTURE.addEventListener("change", function() {
    
     if (this.files[0].size > 4194304) {
@@ -58,14 +57,13 @@ INPUT_PICTURE.addEventListener("change", function() {
         PICTURE_SELECTION.style.display = "none"; 
     }
 })
-// REMISE A ZERO SELECTION IMAGE
 function resetPhotoSelection() {
     INPUT_PICTURE.value = ""; 
     PICTURE_PREVIEW.src = ""; 
     PICTURE_PREVIEW.style.display = "none"; 
     PICTURE_SELECTION.style.display = "block";
 }
-// REMISE A ZERO FORMULAIRE UPLOAD
+
 function resetForm() {
     CATEGORIES_SELECT.value = 0; 
     TITLE_NEW_PHOTO.value = ""; 
@@ -120,7 +118,7 @@ const UPLOAD_WORK = function() {
 }
 // VERIFICATION FORMULAIRE COMPLET
 const VERIFICATION = function (e) {
-    // Vérifie si tous les champs du formulaire sont remplis
+   
     if (INPUT_PICTURE.value != "" && CATEGORIES_SELECT.value != 0 && TITLE_NEW_PHOTO.value != "") {
         BUTTON_SUBMIT.style.backgroundColor = "#1D6154"; 
         BUTTON_SUBMIT.style.cursor = "pointer"; 
@@ -131,12 +129,10 @@ const VERIFICATION = function (e) {
         BUTTON_SUBMIT.removeEventListener("click", UPLOAD_WORK); 
     }
 }
-// Ajoute des écouteurs d'événements pour vérifier le formulaire lors des changements
 INPUT_PICTURE.addEventListener("change", VERIFICATION);
 CATEGORIES_SELECT.addEventListener("change", VERIFICATION);
 TITLE_NEW_PHOTO.addEventListener("change", VERIFICATION);
 
-// Ajoute des écouteurs d'événements pour ouvrir la modal de création de projet
 document.querySelectorAll('#ajout_projet').forEach(a => {
     a.addEventListener('click', OPEN_MODAL_NEW);
 });

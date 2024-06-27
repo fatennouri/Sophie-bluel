@@ -5,29 +5,27 @@ const BUTTON_MODIF_WORKS = document.querySelector('#modif_projet');
 
 let modal = null; 
 
-// FONCTION OUVERTURE BOITE MODALE
-const OPEN_MODAL = function (e) {
+const openModal = function (e) {
     e.preventDefault(); 
     modal = document.querySelector("#modal1"); 
     modal.style.display = null; 
-    modal.addEventListener('click', CLOSE_MODAL); 
-    BUTTON_CLOSE.addEventListener('click', CLOSE_MODAL); 
+    modal.addEventListener('click', closeModal); 
+    BUTTON_CLOSE.addEventListener('click', closeModal); 
     MODALE_WRAPPER.style.display = "flex"; 
     GALLERY_MODALE.innerHTML = ''; 
     fetchWorks(GALLERY_MODALE, true); 
 }
-// FONCTION FERMETURE BOITE MODALE
-const CLOSE_MODAL = function (e) {
+
+const closeModal = function (e) {
     if (modal == null) return; 
         if (e.target != modal && e.target != BUTTON_CLOSE && e.target != document.querySelector('.fa-solid')) return;
     e.preventDefault(); // 
     modal.style.display = "none"; 
-    modal.removeEventListener('click', CLOSE_MODAL); 
-    BUTTON_CLOSE.removeEventListener('click', CLOSE_MODAL); }
+    modal.removeEventListener('click', closeModal); 
+    BUTTON_CLOSE.removeEventListener('click', closeModal); }
 
-// AJOUT LISTENER SUR CLIQUE BOUTON MODIFIER POUR APPELER OUVERTURE MODALE  
-BUTTON_MODIF_WORKS.addEventListener('click', OPEN_MODAL); 
-// FONCTION SUPPRESSION TRAVAUX
+BUTTON_MODIF_WORKS.addEventListener('click', openModal); 
+
 const DELETE_WORK = function (e) {
     const confirmation = confirm("Êtes-vous sûr de vouloir supprimer ce projet ?"); 
 
