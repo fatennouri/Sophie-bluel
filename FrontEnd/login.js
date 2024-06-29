@@ -35,6 +35,12 @@ function loginUser() {
             window.location.href = "index.html";
         }
     })
+    .catch(error => {
+        console.error('Erreur lors de la requête :', error);
+        let loginError = document.getElementById("login_error");
+        loginError.innerHTML = "Une erreur s'est produite lors de la connexion.";
+        loginError.style.display = "flex";
+    });
 }   
 
 function logoutUser() {

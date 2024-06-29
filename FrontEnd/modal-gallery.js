@@ -58,4 +58,7 @@ function deleteWorkFetch(idWork) {
             alert("Erreur lors de la suppression du projet."); 
         }
     })
-}
+    .catch(error => {
+        console.error("Erreur lors de la requête fetch pour supprimer le projet:", error);
+    });
+    }

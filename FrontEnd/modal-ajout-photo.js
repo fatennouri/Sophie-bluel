@@ -102,7 +102,7 @@ const uploadWork = function() {
         body: formData 
     })
     .then(response => {
-        if (response.status === 200 || response.status === 201) {
+        if ( response.status === 201) {
             resetPhotoSelection();
             resetForm(); 
             refreshWorks(GALLERY_MODALE, true); 
@@ -114,6 +114,10 @@ const uploadWork = function() {
             alert('Erreur technique inconnue');
         }
     })
+    .catch(error => {
+        console.error('Erreur lors de la requête fetch pour créer le projet:', error);
+        alert('Erreur lors de la requête fetch pour créer le projet. Veuillez réessayer.');
+    });
 }
 // verification FORMULAIRE COMPLET
 const verification = function (e) {
