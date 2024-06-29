@@ -1,10 +1,10 @@
-const BASE_URL = "http://localhost:5678/api/";
-const WORKS_API = BASE_URL + "works";
-const CATEGORY_API = BASE_URL + "categories";
-const GALLERY_DIV = document.querySelector(".gallery");
-const FILTER_DIV = document.querySelector(".filter");
+const baseUrl = "http://localhost:5678/api/";
+const worksApi = baseUrl + "works";
+const categoryApi = baseUrl + "categories";
+const galleryDiv = document.querySelector(".gallery");
+const filterDiv = document.querySelector(".filter");
 
-fetchWorks(GALLERY_DIV, false);
+fetchWorks(galleryDiv, false);
 
 function refreshWorks(targetDiv, deleteButton) {
   targetDiv.innerHTML = "";
@@ -12,7 +12,7 @@ function refreshWorks(targetDiv, deleteButton) {
 }
 // Récupération des travaux
 function fetchWorks(targetDiv, deleteButton) {
-  fetch(WORKS_API)
+  fetch(worksApi)
     .then((response) => response.json())
     .then((works) => {
       workList = works;
@@ -21,6 +21,7 @@ function fetchWorks(targetDiv, deleteButton) {
       }
     });
 }
+
 // Affichage d'un travail
 function createWork(work, targetDiv, deleteButton) {
   let figure = document.createElement("figure");
@@ -35,8 +36,9 @@ function createWork(work, targetDiv, deleteButton) {
     createDeleteButton(figure, work);
   }
 }
+
 // Récupération des catégories
-fetch(CATEGORY_API)
+fetch(categoryApi)
   .then((response) => response.json())
   .then((categories) => {
     let uniqueCategories = [];
@@ -62,56 +64,61 @@ function createFilterButton(category) {
   categoryLink.id = "category" + category.id;
   categoryLink.classList.add("category");
   categoryLink.innerHTML = category.name;
-  FILTER_DIV.appendChild(categoryLink);
+  filterDiv.appendChild(categoryLink);
 
   categoryLink.addEventListener("click", function () {
     filterWorksByCategory(category.id);
   });
 }
+
 // Filtre les travaux par catégorie
 function filterWorksByCategory(categoryId) {
-  GALLERY_DIV.innerHTML = "";
+  galleryDiv.innerHTML = "";
   for (let i = 0; i < workList.length; i++) {
     if (workList[i].categoryId === categoryId || categoryId === 0) {
-      createWork(workList[i], GALLERY_DIV, false);
+      createWork(workList[i], galleryDiv, false);
     }
   }
   removeSelectedClass();
   addSelectedClass(categoryId);
 }
+
 gestionLogin();
 
 // Création d'un bouton de suppression pour chaque image
 function createDeleteButton(figure, work) {
   let button = document.createElement("i");
   button.classList.add("fa-regular", "fa-trash-can");
-  button.addEventListener("click", DELETE_WORK);
+  button.addEventListener("click", deleteWork);
   button.id = work.id;
   figure.appendChild(button);
 }
+
 function addSelectedClass(categoryId) {
   document.getElementById("category" + categoryId).classList.add("selected");
 }
+
 function removeSelectedClass() {
   let filters = document.querySelectorAll(".category");
   for (let i = 0; i < filters.length; i++) {
     filters[i].classList.remove("selected");
   }
 }
+
 // Gestion de l'état de connexion
 function gestionLogin() {
   if (localStorage.getItem("token")) {
     let loginLogoutLink = document.getElementById("login_logout");
     loginLogoutLink.textContent = "logout";
 
-    let bandeau_edit = document.getElementById("edition");
-    bandeau_edit.style.display = "flex";
+    let bandeauEdit = document.getElementById("edition");
+    bandeauEdit.style.display = "flex";
 
-    let projet_modif = document.getElementById("modif_projet");
-    projet_modif.style.display = "inline";
+    let projetModif = document.getElementById("modif_projet");
+    projetModif.style.display = "inline";
 
-    let button_filter = document.querySelector(".filter");
-    button_filter.style.display = "none";
+    let buttonFilter = document.querySelector(".filter");
+    buttonFilter.style.display = "none";
 
     loginLogoutLink.addEventListener("click", function (event) {
       event.preventDefault();

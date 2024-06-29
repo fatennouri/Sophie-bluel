@@ -1,7 +1,7 @@
-const GALLERY_MODALE = document.querySelector(".modal-gallery"); 
-const BUTTON_CLOSE = document.querySelector('.js-modal-close-1'); 
-const MODALE_WRAPPER = document.querySelector(".modal-wrapper"); 
-const BUTTON_MODIF_WORKS = document.querySelector('#modif_projet'); 
+const galleryModale = document.querySelector(".modal-gallery"); 
+const buttonClose = document.querySelector('.js-modal-close-1'); 
+const modaleWrapper = document.querySelector(".modal-wrapper"); 
+const buttonModifWorks = document.querySelector('#modif_projet'); 
 
 let modal = null; 
 
@@ -10,23 +10,24 @@ const openModal = function (e) {
     modal = document.querySelector("#modal1"); 
     modal.style.display = null; 
     modal.addEventListener('click', closeModal); 
-    BUTTON_CLOSE.addEventListener('click', closeModal); 
-    MODALE_WRAPPER.style.display = "flex"; 
-    GALLERY_MODALE.innerHTML = ''; 
-    fetchWorks(GALLERY_MODALE, true); 
+    buttonClose.addEventListener('click', closeModal); 
+    modaleWrapper.style.display = "flex"; 
+    galleryModale.innerHTML = ''; 
+    fetchWorks(galleryModale, true); 
 }
 
 const closeModal = function (e) {
     if (modal == null) return; 
-        if (e.target != modal && e.target != BUTTON_CLOSE && e.target != document.querySelector('.fa-solid')) return;
-    e.preventDefault(); // 
+    if (e.target != modal && e.target != buttonClose && e.target != document.querySelector('.fa-solid')) return;
+    e.preventDefault(); 
     modal.style.display = "none"; 
     modal.removeEventListener('click', closeModal); 
-    BUTTON_CLOSE.removeEventListener('click', closeModal); }
+    buttonClose.removeEventListener('click', closeModal); 
+}
 
-BUTTON_MODIF_WORKS.addEventListener('click', openModal); 
+buttonModifWorks.addEventListener('click', openModal); 
 
-const DELETE_WORK = function (e) {
+const deleteWork = function (e) {
     const confirmation = confirm("Êtes-vous sûr de vouloir supprimer ce projet ?"); 
 
     if (confirmation) {
@@ -37,11 +38,12 @@ const DELETE_WORK = function (e) {
         }
     }
 }
-// APPEL API SUPPRESSION TRAVAUX
+
+// Appel API suppression travaux
 function deleteWorkFetch(idWork) {
     let token = localStorage.getItem("token");
 
-    fetch(WORKS_API + '/' + idWork, {
+    fetch(worksApi + '/' + idWork, {
         method: "DELETE", 
         headers: {
             'Accept': '*/*',
@@ -49,9 +51,9 @@ function deleteWorkFetch(idWork) {
         }
     })
     .then(response => {
-        if (response.status === 200 || response.status === 201 || response.status === 204) {
-            refreshWorks(GALLERY_MODALE, true); 
-            refreshWorks(GALLERY_DIV, false); 
+        if (response.status >= 200 && response.status < 300) {
+            refreshWorks(galleryModale, true); 
+            refreshWorks(galleryDiv, false); 
         } else {
             alert("Erreur lors de la suppression du projet."); 
         }

@@ -1,24 +1,24 @@
-const NEW_MODALE = document.querySelector(".modal-new-photo"); 
-const BUTTON_CLOSE_NEW = document.querySelector('.js-modal-close-new'); 
-const BUTTON_BACK = document.querySelector('.modal-back'); 
-const BUTTON_ADD = document.querySelector('.button-add-photo'); 
-const INPUT_PICTURE = document.querySelector('#input-picture'); 
-const PICTURE_PREVIEW = document.querySelector('#picture-preview'); 
-const PICTURE_SELECTION = document.querySelector('.picture-selection'); 
-const CATEGORIES_SELECT = document.querySelector('.select-category'); 
-const TITLE_NEW_PHOTO = document.querySelector('.input-titre'); 
-const BUTTON_SUBMIT = document.querySelector('.button-submit'); 
+const newModale = document.querySelector(".modal-new-photo"); 
+const buttonCloseNew = document.querySelector('.js-modal-close-new'); 
+const buttonBack = document.querySelector('.modal-back'); 
+const buttonAdd = document.querySelector('.button-add-photo'); 
+const inputPicture = document.querySelector('#input-picture'); 
+const picturePreview = document.querySelector('#picture-preview'); 
+const pictureSelection = document.querySelector('.picture-selection'); 
+const categoriesSelect = document.querySelector('.select-category'); 
+const titleNewPhoto = document.querySelector('.input-titre'); 
+const buttonSubmit = document.querySelector('.button-submit'); 
 
-let modal_new = null; 
+let modalNew= null; 
 
 // FONCTION OUVERTURE BOITE MODALE
-const OPEN_MODAL_NEW = function (e) {
+const openModalNew= function (e) {
     e.preventDefault(); 
     modal.style.display = "none";
-    modal_new = document.querySelector("#modal2");
-    modal_new.style.display = null;
-    modal_new.addEventListener('click', CLOSE_MODAL_NEW); 
-    BUTTON_CLOSE_NEW.addEventListener('click', CLOSE_MODAL_NEW); 
+    modalNew= document.querySelector("#modal2");
+    modalNew.style.display = null;
+    modalNew.addEventListener('click', closeModalNew);
+    buttonCloseNew.addEventListener('click', closeModalNew); 
     let modal_wrapper = document.querySelector(".modal-wrapper-new");
     modal_wrapper.style.display = "flex";
     resetPhotoSelection(); 
@@ -26,25 +26,24 @@ const OPEN_MODAL_NEW = function (e) {
     loadCategories(); 
 }
 // FONCTION FERMETURE BOITE MODALE
-const CLOSE_MODAL_NEW = function (e) {
-    if (modal_new == null) return; 
-    if (e.target != modal_new && e.target != BUTTON_CLOSE_NEW && e.target != document.querySelector('.top .fa-x')) return;
+const closeModalNew= function (e) {
+    if (modalNew== null) return; 
+    if (e.target != modalNew&& e.target != buttonCloseNew && e.target != document.querySelector('.top .fa-x')) return;
     e.preventDefault(); 
-    modal_new.style.display = "none"; 
-    modal_new.removeEventListener('click', CLOSE_MODAL_NEW);
-    BUTTON_CLOSE_NEW.removeEventListener('click', CLOSE_MODAL_NEW); }
+    modalNew.style.display = "none"; 
+    modalNew.removeEventListener('click', closeModalNew);
+    buttonCloseNew.removeEventListener('click', closeModalNew); }
 
-
-BUTTON_BACK.addEventListener("click", function() {
-    modal_new.style.display = "none"; 
+buttonBack.addEventListener("click", function() {
+    modalNew.style.display = "none"; 
     modal.style.display = "flex"; 
 })
 
-BUTTON_ADD.addEventListener("click", function() {
-    INPUT_PICTURE.click(); 
+buttonAdd.addEventListener("click", function() {
+    inputPicture.click(); 
 })
 
-INPUT_PICTURE.addEventListener("change", function() {
+inputPicture.addEventListener("change", function() {
    
     if (this.files[0].size > 4194304) {
         alert("Fichier trop volumineux");
@@ -52,49 +51,49 @@ INPUT_PICTURE.addEventListener("change", function() {
     };
     
     if (this.files[0]) {
-        PICTURE_PREVIEW.src = URL.createObjectURL(this.files[0]); 
-        PICTURE_PREVIEW.style.display = "block"; 
-        PICTURE_SELECTION.style.display = "none"; 
+        picturePreview.src = URL.createObjectURL(this.files[0]); 
+        picturePreview.style.display = "block"; 
+        pictureSelection.style.display = "none"; 
     }
 })
 function resetPhotoSelection() {
-    INPUT_PICTURE.value = ""; 
-    PICTURE_PREVIEW.src = ""; 
-    PICTURE_PREVIEW.style.display = "none"; 
-    PICTURE_SELECTION.style.display = "block";
+    inputPicture.value = ""; 
+    picturePreview.src = ""; 
+    picturePreview.style.display = "none"; 
+    pictureSelection.style.display = "block";
 }
 
 function resetForm() {
-    CATEGORIES_SELECT.value = 0; 
-    TITLE_NEW_PHOTO.value = ""; 
+    categoriesSelect.value = 0; 
+    titleNewPhoto.value = ""; 
 }
 // CHARGEMENT CATEGORIES DEPUIS API
 function loadCategories() {
-    CATEGORIES_SELECT.innerHTML = ''; 
+    categoriesSelect.innerHTML = ''; 
     let option = document.createElement("option");
     option.value = 0;
     option.text = "";
-    CATEGORIES_SELECT.add(option); 
-    fetch(CATEGORY_API)
+    categoriesSelect.add(option); 
+    fetch(categoryApi)
     .then(response => response.json()) 
     .then(categories => {
         for (let category of categories) {
             let option = document.createElement("option");
             option.value = category.id; 
             option.text = category.name; 
-            CATEGORIES_SELECT.add(option); 
+            categoriesSelect.add(option); 
         }   
     })
 }
 // UPLOAD NOUVEAU PROJET
-const UPLOAD_WORK = function() {
-    let token = sessionStorage.getItem("token");
+const uploadWork = function() {
+    let token = localStorage.getItem("token");
 
     const formData = new FormData();
-    formData.append("image", INPUT_PICTURE.files[0]); 
-    formData.append("title", TITLE_NEW_PHOTO.value); 
-    formData.append("category", CATEGORIES_SELECT.value);
-    fetch(WORKS_API, {
+    formData.append("image", inputPicture.files[0]); 
+    formData.append("title", titleNewPhoto.value); 
+    formData.append("category", categoriesSelect.value);
+    fetch(worksApi, {
         method: "POST",
         headers: {
             'Accept': '*/*',
@@ -108,7 +107,7 @@ const UPLOAD_WORK = function() {
             resetForm(); 
             refreshWorks(GALLERY_MODALE, true); 
             refreshWorks(GALLERY_DIV, false); 
-            VERIFICATION();
+            verification();
         } else if (response.status === 401) {
             alert('Session expirée ou invalide'); 
         } else {
@@ -116,23 +115,23 @@ const UPLOAD_WORK = function() {
         }
     })
 }
-// VERIFICATION FORMULAIRE COMPLET
-const VERIFICATION = function (e) {
+// verification FORMULAIRE COMPLET
+const verification = function (e) {
    
-    if (INPUT_PICTURE.value != "" && CATEGORIES_SELECT.value != 0 && TITLE_NEW_PHOTO.value != "") {
-        BUTTON_SUBMIT.style.backgroundColor = "#1D6154"; 
-        BUTTON_SUBMIT.style.cursor = "pointer"; 
-        BUTTON_SUBMIT.addEventListener("click", UPLOAD_WORK); 
+    if (inputPicture.value != "" && categoriesSelect.value != 0 && titleNewPhoto.value != "") {
+        buttonSubmit.style.backgroundColor = "#1D6154"; 
+        buttonSubmit.style.cursor = "pointer"; 
+        buttonSubmit.addEventListener("click", uploadWork); 
     } else {
-        BUTTON_SUBMIT.style.backgroundColor = "#A7A7A7"; 
-        BUTTON_SUBMIT.style.cursor = "default"; 
-        BUTTON_SUBMIT.removeEventListener("click", UPLOAD_WORK); 
+        buttonSubmit.style.backgroundColor = "#A7A7A7"; 
+        buttonSubmit.style.cursor = "default"; 
+        buttonSubmit.removeEventListener("click", uploadWork); 
     }
 }
-INPUT_PICTURE.addEventListener("change", VERIFICATION);
-CATEGORIES_SELECT.addEventListener("change", VERIFICATION);
-TITLE_NEW_PHOTO.addEventListener("change", VERIFICATION);
+inputPicture.addEventListener("change", verification);
+categoriesSelect.addEventListener("change", verification);
+titleNewPhoto.addEventListener("change", verification);
 
 document.querySelectorAll('#ajout_projet').forEach(a => {
-    a.addEventListener('click', OPEN_MODAL_NEW);
+    a.addEventListener('click', openModalNew);
 });
