@@ -105,8 +105,8 @@ const uploadWork = function() {
         if ( response.status === 201) {
             resetPhotoSelection();
             resetForm(); 
-            refreshWorks(GALLERY_MODALE, true); 
-            refreshWorks(GALLERY_DIV, false); 
+            refreshWorks(galleryModale, true); 
+            refreshWorks(galleryDiv, false); 
             verification();
         } else if (response.status === 401) {
             alert('Session expirée ou invalide'); 
